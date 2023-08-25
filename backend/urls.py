@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('files/', include('files.urls')),
+    path('products/', include('products.urls')),
     path('send-email/', EmailAPIView.as_view()),
 ]
 

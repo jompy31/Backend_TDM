@@ -41,25 +41,26 @@ class EmailAPIView(APIView):
             subject = serializer.validated_data['subject']
             message = serializer.validated_data['message']
             from_email = serializer.validated_data['from_email']
-            recipient_list = serializer.validated_data['recipient_list']
+            recipient_list = [email.strip() for email in serializer.validated_data['recipient_list'].split(',')]
             attachments = request.FILES.getlist('attachments')  # Get the list of attachments
 
-            email = EmailMessage(
-                subject=subject,
-                body=message,
-                from_email=from_email,
-                to=recipient_list,
-            )
+            # Loop through the recipient_list and send an email to each recipient
+            for recipient in recipient_list:
+                email = EmailMessage(
+                    subject=subject,
+                    body=message,
+                    from_email=from_email,
+                    to=[recipient],  # Pass a list with the current recipient only
+                )
 
-            for attachment in attachments:
-                email.attach(attachment.name, attachment.read(), attachment.content_type)
+                for attachment in attachments:
+                    email.attach(attachment.name, attachment.read(), attachment.content_type)
 
-            email.send()
+                email.send()
 
-            return Response('Correo enviado correctamente', status=status.HTTP_200_OK)
+            return Response('Correos enviados correctamente', status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class CommentListCreate(generics.ListCreateAPIView):
     serializer_class = CommentSerializer

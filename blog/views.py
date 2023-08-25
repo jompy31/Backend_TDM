@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 class BlogPostListCreate(generics.ListCreateAPIView):
     serializer_class = BlogPostSerializer
     queryset = BlogPost.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]  # Permitir acceso sin autenticación
+    permission_classes = [AllowAny] # Permitir acceso sin autenticación
 
     def perform_create(self, serializer):
         author = self.request.user
@@ -33,12 +33,12 @@ class BlogPostListCreate(generics.ListCreateAPIView):
 class BlogPostRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BlogPostSerializer
     queryset = BlogPost.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]  
 
 
 class CommentListCreate(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         blog_post_id = self.kwargs['blog_post_id']
@@ -52,7 +52,7 @@ class CommentListCreate(generics.ListCreateAPIView):
 
 class CommentRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]  
 
     def get_queryset(self):
         blog_post_id = self.kwargs['blog_post_id']
@@ -66,7 +66,7 @@ class CommentRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
 class LikeCreate(generics.CreateAPIView):
     serializer_class = LikeSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]  
 
     def perform_create(self, serializer):
         blog_post_id = self.kwargs['blog_post_id']

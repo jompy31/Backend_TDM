@@ -10,7 +10,7 @@ class EmailSerializer(serializers.Serializer):
     subject = serializers.CharField(max_length=200)
     message = serializers.CharField(max_length=1000)
     from_email = serializers.EmailField()
-    recipient_list = serializers.ListField(child=serializers.EmailField())
+    recipient_list = serializers.CharField()  
     attachments = serializers.ListField(child=serializers.FileField(), required=False)
 
 class CommentSerializer(serializers.ModelSerializer):

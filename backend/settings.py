@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'files',
+    'products',
     'rest_framework.authtoken',
     'ckeditor',
     'blog',
