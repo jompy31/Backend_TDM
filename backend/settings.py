@@ -14,9 +14,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-j9n3wr7mn%t^oox!5aet9xbxgp17u11@i5y9w^ij!sx6wo*8=&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jompy31.pythonanywhere.com','127.0.0.1','localhost']
 
 CSRF_COOKIE_SECURE = True  # Opcionalmente, puedes establecerlo en False para desarrollo local
 
@@ -54,7 +54,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
+    'https://next.tdm-3d.com',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -94,8 +94,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Jompy31$TDM',
+        'USER': 'Jompy31',
+        'PASSWORD': 'Nuevavida2019#',
+        'HOST':'Jompy31.mpysql.pythonanywhere-services.com',
+        'PORT': '',
     }
 }
 
@@ -137,12 +141,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = ['/home/Jompy31/backend_django/static']
+STATIC_ROOT = 'home/Jompy31/static/'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/Jompy31/media/'
 
 
 # Default primary key field type
